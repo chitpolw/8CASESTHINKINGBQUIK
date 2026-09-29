@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>B-QUIK | Facilitator Case Thinking</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --yellow:#FFD400;
+  --yellow-light:#FFF7CC;
+  --black:#171717;
+  --dark:#242424;
+  --gray:#6B6B6B;
+  --light:#F3F3F3;
+  --border:#D9D9D9;
+  --white:#FFFFFF;
+
+  --red:#E53935;
+  --orange:#FF6F00;
+  --green:#39A96B;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'Sarabun',sans-serif;
+  background:#EAEAEA;
+  color:var(--black);
+  line-height:1.7;
+}
+
+button{
+  font-family:inherit;
+}
+
+.page{
+  width:min(100%,950px);
+  margin:auto;
+  background:#fff;
+  min-height:100vh;
+}
+
+/* =========================
+   LANDING
+========================= */
+
+.topbar{
+  background:var(--black);
+  color:#fff;
+  text-align:center;
+  padding:12px 20px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+
+.hero{
+  background:var(--yellow);
+  padding:42px 28px 38px;
+  text-align:center;
+  border-bottom:5px solid var(--black);
+}
+
+.hero-icon{
+  font-size:46px;
+  margin-bottom:6px;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,44px);
+  line-height:1.2;
+}
+
+.hero p{
+  margin-top:10px;
+  font-size:18px;
+  font-weight:500;
+}
+
+.content{
+  padding:30px 24px 60px;
+}
+
+.instruction{
+  background:var(--light);
+  border-left:6px solid var(--yellow);
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:30px;
+}
+
+.instruction strong{
+  display:block;
+  font-size:21px;
+  margin-bottom:5px;
+}
+
+.case-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-top:20px;
+}
+
+.case-select{
+  border:2px solid var(--border);
+  border-radius:18px;
+  padding:25px 18px;
+  background:#fff;
+  cursor:pointer;
+  text-align:center;
+  transition:.2s ease;
+  min-height:130px;
+}
+
+.case-select:hover{
+  border-color:var(--black);
+  background:var(--yellow-light);
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.10);
+}
+
+.case-number{
+  width:72px;
+  height:72px;
+  margin:auto;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--black);
+  color:#fff;
+  font-size:24px;
+  font-weight:700;
+}
+
+.case-label{
+  margin-top:10px;
+  font-weight:700;
+  font-size:17px;
+}
+
+
+/* =========================
+   CASE PAGE
+========================= */
+
+.case-page{
+  display:none;
+}
+
+.case-page.active{
+  display:block;
+}
+
+/* Gradient navigation button */
+
+.back-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:13px 28px;
+  margin-bottom:24px;
+
+  border:none;
+  border-radius:999px;
+
+  background:linear-gradient(
+    90deg,
+    #E53935 0%,
+    #FF6F00 50%,
+    #FFD600 100%
+  );
+
+  color:#111;
+
+  font-size:18px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  box-shadow:0 5px 14px rgba(0,0,0,.18);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+.back-button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+  box-shadow:0 7px 18px rgba(0,0,0,.25);
+}
+
+.back-button:active{
+  transform:translateY(0);
+}
+
+
+/* Case header */
+
+.case-header{
+  background:var(--black);
+  color:#fff;
+  border-radius:16px;
+  padding:24px;
+  margin-bottom:24px;
+}
+
+.case-header .case-tag{
+  display:inline-block;
+  background:var(--yellow);
+  color:var(--black);
+  border-radius:999px;
+  padding:4px 14px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.case-header h2{
+  font-size:30px;
+  line-height:1.3;
+}
+
+.case-header p{
+  margin-top:6px;
+  color:#ddd;
+}
+
+
+/* Section */
+
+.section{
+  margin-bottom:28px;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.section-number{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--black);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:700;
+}
+
+.section-title h3{
+  font-size:23px;
+}
+
+
+/* Color transition */
+
+.color-transition{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  background:var(--light);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:24px;
+}
+
+.color-box{
+  min-width:120px;
+  padding:10px 18px;
+  border-radius:999px;
+  text-align:center;
+  font-weight:700;
+  font-size:18px;
+}
+
+.yellow{
+  background:#FFD400;
+  color:#111;
+}
+
+.orange{
+  background:#FF6F00;
+  color:#fff;
+}
+
+.red{
+  background:#E53935;
+  color:#fff;
+}
+
+.arrow{
+  font-size:28px;
+  font-weight:700;
+}
+
+
+/* Summary */
+
+.summary{
+  background:var(--yellow-light);
+  border:1px solid #E5CF55;
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:24px;
+}
+
+.summary strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+
+/* Score cards */
+
+.score-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.score-card{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  background:#fff;
+}
+
+.score-card h4{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.score{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  height:42px;
+  background:var(--black);
+  color:#fff;
+  border-radius:50%;
+  font-weight:700;
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.score-card p{
+  color:#444;
+}
+
+
+/* Total */
+
+.total{
+  margin-top:16px;
+  padding:18px;
+  border-radius:14px;
+  background:var(--black);
+  color:#fff;
+  text-align:center;
+}
+
+.total strong{
+  font-size:22px;
+}
+
+
+/* Layer cards */
+
+.layer{
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.layer1{
+  background:#F4F4F4;
+  border-left:6px solid #999;
+}
+
+.layer2{
+  background:#FFF8D6;
+  border-left:6px solid var(--yellow);
+}
+
+.layer h4{
+  font-size:21px;
+  margin-bottom:8px;
+}
+
+.layer p{
+  margin-bottom:8px;
+}
+
+.layer ul{
+  margin:10px 0 0 22px;
+}
+
+
+/* Learning point */
+
+.learning{
+  background:#171717;
+  color:#fff;
+  border-radius:16px;
+  padding:22px;
+  margin-top:22px;
+}
+
+.learning .label{
+  display:inline-block;
+  background:var(--yellow);
+  color:#111;
+  border-radius:999px;
+  padding:3px 12px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.learning p{
+  font-size:18px;
+}
+
+
+/* Discussion */
+
+.discussion{
+  background:#F5F5F5;
+  border-radius:16px;
+  padding:22px;
+  margin-top:24px;
+}
+
+.discussion h3{
+  font-size:22px;
+  margin-bottom:16px;
+}
+
+.question{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.question strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+
+/* Editable note */
+
+.edit-note{
+  background:#FFF4F0;
+  border:1px dashed #E53935;
+  border-radius:12px;
+  padding:14px 16px;
+  margin-top:15px;
+  color:#7A2A25;
+}
+
+.edit-note strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+
+/* Footer */
+
+.footer{
+  text-align:center;
+  padding:25px;
+  color:#777;
+  font-size:14px;
+}
+
+
+/* Responsive */
+
+@media(max-width:650px){
+
+  .case-grid{
+    grid-template-columns:1fr;
+  }
+
+  .score-grid{
+    grid-template-columns:1fr;
+  }
+
+  .color-transition{
+    flex-direction:column;
+  }
+
+  .arrow{
+    transform:rotate(90deg);
+  }
+
+  .content{
+    padding:22px 16px 45px;
+  }
+
+  .case-header h2{
+    font-size:25px;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    B-QUIK | CUSTOMER SERVICE | FACILITATOR
+  </div>
+
+
+  <!-- =========================
+       LANDING PAGE
+  ========================== -->
+
+  <section id="landing">
+
+    <div class="hero">
+      <div class="hero-icon">🚩</div>
+      <h1>วิธีคิดตาม Severity Matrix</h1>
+      <p>Facilitator Guide — กิจกรรมให้ธงนำทาง</p>
+    </div>
+
+    <div class="content">
+
+      <div class="instruction">
+        <strong>เลือก CASE ที่ต้องการดู</strong>
+        หน้านี้ตั้งใจไม่แสดงชื่อเรื่องหรือสีของแต่ละเคส เพื่อไม่ให้ผู้เรียนเห็นข้อมูลของเคสอื่นก่อนเวลา
+      </div>
+
+      <div class="case-grid">
+
+        <button class="case-select" onclick="showCase(1)">
+          <div class="case-number">01</div>
+          <div class="case-label">CASE 01</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(2)">
+          <div class="case-number">02</div>
+          <div class="case-label">CASE 02</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(3)">
+          <div class="case-number">03</div>
+          <div class="case-label">CASE 03</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(4)">
+          <div class="case-number">04</div>
+          <div class="case-label">CASE 04</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(5)">
+          <div class="case-number">05</div>
+          <div class="case-label">CASE 05</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(6)">
+          <div class="case-number">06</div>
+          <div class="case-label">CASE 06</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(7)">
+          <div class="case-number">07</div>
+          <div class="case-label">CASE 07</div>
+        </button>
+
+        <button class="case-select" onclick="showCase(8)">
+          <div class="case-number">08</div>
+          <div class="case-label">CASE 08</div>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 01
+  ====================================================== -->
+
+  <section id="case1" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 01</span>
+        <h2>รถสั่นหลังรับรถ</h2>
+        <p>ข้อมูลเพิ่ม → ยืนยันสีเดิม</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box yellow">🟨 Yellow</div>
+        <div class="arrow">→</div>
+        <div class="color-box yellow">🟨 Yellow</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้าแจ้งว่ารถสั่นตอนจอดติดเครื่องหลังรับรถ
+          และกังวลว่ากลับไปแล้วรถอาจมีปัญหา
+        </p>
+        <p>
+          ตอนนี้ยังไม่มีข้อมูลว่ารถมีความเสียหายรุนแรง
+          หรือมีความเสี่ยงด้านความปลอดภัย
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 1 → Yellow</strong>
+        มีอาการที่ต้องตรวจสอบ แต่ข้อมูลที่มีตอนนั้นยังไม่ชี้ว่ามีความรุนแรงสูง
+        ผลกระทบหลักคือความกังวลของลูกค้า
+      </div>
+
+
+      <div class="score-grid">
+
+        <div class="score-card">
+          <h4>① ความเสียหาย</h4>
+          <div class="score">1</div>
+          <p>มีอาการจริง แต่ยังไม่พบความเสียหายรุนแรง</p>
+        </div>
+
+        <div class="score-card">
+          <h4>② ผลกระทบ</h4>
+          <div class="score">0</div>
+          <p>ผลกระทบหลักยังเป็นความกังวล และยังไม่มีความเสียหายต่อการใช้งาน</p>
+        </div>
+
+        <div class="score-card">
+          <h4>③ การขยายวง</h4>
+          <div class="score">0</div>
+          <p>ลูกค้ากับพนักงานยังพูดคุยและจัดการแนวทางได้</p>
+        </div>
+
+        <div class="score-card">
+          <h4>④ ความเสี่ยง</h4>
+          <div class="score">1</div>
+          <p>ยังมีความเสี่ยงที่ต้องตรวจสอบ แต่ยังไม่ชัดว่าเป็นความเสี่ยงรุนแรง</p>
+        </div>
+
+      </div>
+
+      <div class="total">
+        <strong>รวมคะแนน: 2</strong><br>
+        🟨 Yellow
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ช่างตรวจแล้วพบว่าอาการสั่นมีจริง
+          แต่ยังไม่พบปัญหาที่ทำให้รถอยู่ในภาวะอันตราย
+        </p>
+        <p>
+          มีการนัดลูกค้านำรถกลับมาตรวจเพิ่มเติมในวันถัดไป
+          ลูกค้ารับรู้และยอมรับแนวทาง
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 2 → Yellow</strong>
+        ข้อมูลใหม่ยืนยันว่าอาการมีจริง แต่ยังไม่พบความเสี่ยงด้านความปลอดภัย
+        มีแผนตรวจเพิ่มเติมและลูกค้ายอมรับแนวทาง
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          VERIFY ไม่ได้มีไว้เพื่อหาว่าจะยกระดับอย่างเดียว
+          แต่มีไว้เพื่อให้เรามั่นใจว่า ระดับที่เราเลือกนั้นเหมาะสมกับข้อเท็จจริงจริง ๆ
+        </p>
+      </div>
+
+
+      <div class="discussion">
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 02
+  ====================================================== -->
+
+  <section id="case2" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 02</span>
+        <h2>รถเสร็จแล้ว แต่ลูกค้ายังไม่ได้รถ</h2>
+        <p>ข้อมูลเพิ่ม → ยกระดับ</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box yellow">🟨 Yellow</div>
+        <div class="arrow">→</div>
+        <div class="color-box orange">🟧 Orange</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้ามารับรถตามเวลาที่แจ้งไว้ แต่รถยังไม่พร้อมส่งมอบ
+        </p>
+        <p>
+          ลูกค้าต้องไปรับลูกตอน 18.00 น.
+          และกังวลเพราะยังไม่รู้ว่าจะได้รถเมื่อไร
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 1 → Yellow</strong>
+        ตอนแรกเป็นเรื่องงานล่าช้าและความไม่แน่นอน
+        ยังไม่มีข้อมูลว่าผลกระทบขยายไปมากกว่านั้น
+      </div>
+
+
+      <div class="score-grid">
+
+        <div class="score-card">
+          <h4>① ความเสียหาย</h4>
+          <div class="score">0</div>
+          <p>ยังไม่มีความเสียหายต่อรถหรือทรัพย์สินที่ระบุไว้</p>
+        </div>
+
+        <div class="score-card">
+          <h4>② ผลกระทบ</h4>
+          <div class="score">1</div>
+          <p>ลูกค้าได้รับผลกระทบจากความล่าช้าและไม่สามารถวางแผนได้</p>
+        </div>
+
+        <div class="score-card">
+          <h4>③ การขยายวง</h4>
+          <div class="score">0</div>
+          <p>ยังไม่มีข้อมูลว่าปัญหาขยายไปถึงบุคคลอื่น</p>
+        </div>
+
+        <div class="score-card">
+          <h4>④ ความเสี่ยง</h4>
+          <div class="score">1</div>
+          <p>มีความเสี่ยงว่าผลกระทบจะเพิ่มขึ้น หากลูกค้ายังไม่ได้รถตามเวลา</p>
+        </div>
+
+      </div>
+
+      <div class="total">
+        <strong>🟨 Yellow</strong>
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          งานซ่อมยังไม่สามารถส่งมอบรถได้ตามเวลาที่คาดไว้
+        </p>
+        <p>
+          สามีของลูกค้าออกจากงานไม่ได้ ลูกอยู่ที่โรงเรียน
+          และลูกค้าต้องไปเอาลูกเองโดยไม่มีรถคันอื่น
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 2 → Orange</strong>
+        เรื่องไม่ได้เป็นเพียง “รถเสร็จช้า” แล้ว
+        แต่เริ่มกระทบการดำเนินชีวิตของลูกค้าอย่างชัดเจน
+        และต้องมีผู้จัดการเข้ามารับผิดชอบ
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          ข้อมูลใหม่ทำให้เราเห็น “ผลกระทบจริง” ที่ตอนแรกยังไม่เห็น
+          จึงต้องทบทวนระดับของเคส ไม่ใช่ยึดสีเดิมเพียงเพราะเราเลือกไปแล้ว
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 03
+  ====================================================== -->
+
+  <section id="case3" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 03</span>
+        <h2>ไฟเตือนขึ้นหลังรับรถ</h2>
+        <p>ข้อมูลเพิ่ม → ยกระดับเป็น Red</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box yellow">🟨 Yellow</div>
+        <div class="arrow">→</div>
+        <div class="color-box red">🟥 Red</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้าพบไฟสีแดงขึ้นบนหน้าปัดหลังรับรถ
+          และยังไม่ได้ขับรถออกจากสาขา
+        </p>
+        <p>
+          พนักงานยังไม่ทราบว่าไฟดังกล่าวหมายถึงอะไร
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 1 → Yellow</strong>
+        มีสัญญาณผิดปกติที่ต้องตรวจสอบ
+        แต่ยังไม่มีข้อมูลเพียงพอที่จะยืนยันว่าเกี่ยวข้องกับความปลอดภัย
+      </div>
+
+
+      <div class="score-grid">
+
+        <div class="score-card">
+          <h4>① ความเสียหาย</h4>
+          <div class="score">1</div>
+          <p>พบสัญญาณผิดปกติ แต่ยังไม่รู้สาเหตุ</p>
+        </div>
+
+        <div class="score-card">
+          <h4>② ผลกระทบ</h4>
+          <div class="score">1</div>
+          <p>ลูกค้ากังวลและยังไม่สามารถนำรถออกได้อย่างมั่นใจ</p>
+        </div>
+
+        <div class="score-card">
+          <h4>③ การขยายวง</h4>
+          <div class="score">0</div>
+          <p>ยังไม่มีข้อมูลว่ามีบุคคลอื่นได้รับผลกระทบ</p>
+        </div>
+
+        <div class="score-card">
+          <h4>④ ความเสี่ยง</h4>
+          <div class="score">1</div>
+          <p>ยังมีความเสี่ยงที่ต้องตรวจสอบ แต่ยังไม่ทราบระดับ</p>
+        </div>
+
+      </div>
+
+
+      <div class="total">
+        <strong>🟨 Yellow</strong>
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ช่างตรวจพบว่าไฟเกี่ยวข้องกับระบบเบรก
+        </p>
+        <p>
+          ระบบเบรกมีค่าผิดปกติ และไม่ควรปล่อยให้ลูกค้านำรถออกไป
+          ก่อนตรวจสอบอย่างละเอียด
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟥 Layer 2 → Red</strong>
+        ข้อมูลใหม่เปลี่ยนประเด็นจาก “ไฟเตือนที่ยังไม่ทราบความหมาย”
+        เป็นเรื่องที่เกี่ยวข้องกับระบบเบรกและความปลอดภัยโดยตรง
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          เมื่อข้อมูลใหม่เปิดเผยความเสี่ยงด้านความปลอดภัย
+          เราต้องหยุดกระบวนการเดิมและเข้าสู่ Red Protocol ทันที
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 04
+  ====================================================== -->
+
+  <section id="case4" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 04</span>
+        <h2>รถไหลออกจากช่องซ่อม</h2>
+        <p>Red ตั้งแต่แรก → ยืนยัน Red</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box red">🟥 Red</div>
+        <div class="arrow">→</div>
+        <div class="color-box red">🟥 Red</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          รถเคลื่อนตัวออกจากตำแหน่งโดยไม่มีคนอยู่ในรถ
+          พนักงานต้องถอยออกจากแนวรถ
+        </p>
+        <p>
+          ลูกค้าที่อยู่บริเวณนั้นเห็นเหตุการณ์และพูดว่า
+          “เมื่อกี้รถเกือบชนคนแล้วนะ!”
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟥 Layer 1 → Red</strong>
+        เหตุการณ์ด้านความปลอดภัยเกิดขึ้นแล้ว
+        มีความเสี่ยงต่อชีวิตและทรัพย์สิน จึงไม่ควรรอข้อมูลให้ครบก่อนแจ้งผู้จัดการ
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ตรวจสอบแล้วพบว่ารถมีความเสียหายเล็กน้อยบริเวณกันชน
+        </p>
+        <ul>
+          <li>ไม่มีผู้ได้รับบาดเจ็บ</li>
+          <li>มีลูกค้าอยู่ในพื้นที่หลายคน</li>
+          <li>มีลูกค้าถ่ายวิดีโอเหตุการณ์ไว้</li>
+        </ul>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟥 Layer 2 → Red</strong>
+        ข้อมูลใหม่ไม่ได้ลดระดับความรุนแรงของเหตุการณ์
+        แต่ยืนยันว่ามีความเสี่ยงด้านความปลอดภัย ทรัพย์สิน และมีผู้เห็นเหตุการณ์หลายคน
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          เคสสีแดงบางเรื่องไม่ต้องรอ VERIFY ให้ครบก่อนจึงแจ้ง
+          เพราะใน Red Protocol การหยุดหรือลดความเสี่ยงต้องมาก่อน
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 05
+  ====================================================== -->
+
+  <section id="case5" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 05</span>
+        <h2>ลูกค้าไม่พอใจเรื่องค่าใช้จ่าย</h2>
+        <p>Orange ตั้งแต่แรก → ยืนยัน Orange</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box orange">🟧 Orange</div>
+        <div class="arrow">→</div>
+        <div class="color-box orange">🟧 Orange</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้าไม่พอใจยอดค่าใช้จ่ายและเริ่มเสียงดังขึ้น
+        </p>
+        <p>
+          มีลูกค้าคนอื่นอยู่บริเวณนั้น
+          จึงมีเหตุผลให้ผู้ช่วยผู้จัดการเข้ามารับทราบและช่วยจัดการ
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 1 → Orange</strong>
+        เป็นเรื่องร้องเรียนที่ควรมีผู้จัดการเข้ามารับ ownership
+        และตรวจสอบข้อมูลก่อนตัดสินใจ
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <ul>
+          <li>มีงานเพิ่มเติมจริง</li>
+          <li>มีการแจ้งราคาเพิ่มเติมก่อนดำเนินการ</li>
+          <li>ลูกค้าได้รับข้อมูล แต่จำไม่ได้ว่าเคยตอบตกลง</li>
+          <li>ไม่มีความเสียหายต่อรถหรือทรัพย์สิน</li>
+          <li>ยังไม่มีการขู่ว่าจะร้องเรียนหรือเผยแพร่เรื่อง</li>
+          <li>ลูกค้าเริ่มใจเย็นลงหลังผู้ช่วยผู้จัดการเข้ามาคุย</li>
+        </ul>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 2 → Orange</strong>
+        ข้อมูลใหม่ช่วยให้เห็นข้อเท็จจริงชัดขึ้น
+        แต่ไม่ได้เพิ่มความรุนแรงถึงระดับ Red
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          VERIFY ไม่ได้แปลว่า “ต้องยกระดับทุกครั้ง”
+          บางครั้งข้อมูลใหม่ทำให้เรามั่นใจมากขึ้นว่า Orange คือระดับที่เหมาะสม
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 06
+  ====================================================== -->
+
+  <section id="case6" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 06</span>
+        <h2>ลูกค้าบอกว่าเบรกมีเสียง</h2>
+        <p>ข้อมูลเพิ่ม → ยกระดับเป็น Red</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box orange">🟧 Orange</div>
+        <div class="arrow">→</div>
+        <div class="color-box red">🟥 Red</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้าโทรมาแจ้งว่าเบรกมีเสียงหลังจากนำรถเข้ารับบริการ
+        </p>
+        <p>
+          ลูกค้าบอกว่ายังเบรกได้ แต่ไม่สะดวกนำรถกลับมาตรวจทันที
+          และไม่อยากเสียเวลาเข้าออกหลายรอบ
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 1 → Orange</strong>
+        เป็นปัญหาที่เกี่ยวข้องกับงานบริการเดิม
+        และควรมีผู้จัดการรับรู้และช่วยติดตาม
+        แต่ข้อมูลตอนแรกยังไม่ยืนยันว่ามีความเสี่ยงด้านความปลอดภัยระดับสูง
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ลูกค้าส่งคลิปเสียงมาให้ช่างตรวจสอบ
+          และช่างพบว่าเสียงไม่ใช่เสียงจากการเสียดสีทั่วไป
+        </p>
+        <p>
+          เมื่อลูกค้าทดลองเบรก พบว่าต้องเหยียบลึกกว่าเดิม
+          และขณะนั้นกำลังจะขับรถออกไปส่งลูก
+        </p>
+        <p>
+          ช่างจึงไม่แนะนำให้ลูกค้าขับรถต่อ
+          และให้หยุดการนัดแบบปกติทันที
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟥 Layer 2 → Red</strong>
+        ข้อมูลใหม่เปลี่ยนจาก “มีเสียงเบรก”
+        เป็นสัญญาณที่เกี่ยวข้องกับประสิทธิภาพของระบบเบรก
+        และมีความเสี่ยงด้านความปลอดภัยโดยตรง
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          ข้อมูลเล็ก ๆ ที่ดูเหมือนไม่สำคัญในตอนแรก
+          อาจเปลี่ยนระดับของเคสได้
+          โดยเฉพาะเมื่อเกี่ยวข้องกับความปลอดภัย
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 07
+  ====================================================== -->
+
+  <section id="case7" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 07</span>
+        <h2>ลูกค้าบอกว่าเครื่องปรับอากาศไม่เย็นหลังรับรถ</h2>
+        <p>ข้อมูลเพิ่ม → ยืนยันระดับเดิม</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box yellow">🟨 Yellow</div>
+        <div class="arrow">→</div>
+        <div class="color-box yellow">🟨 Yellow</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้ารับรถแล้วพบว่าเครื่องปรับอากาศไม่ค่อยเย็น
+          ทั้งที่ก่อนนำรถเข้ารับบริการยังใช้งานได้ตามปกติ
+        </p>
+        <p>
+          ลูกค้าต้องการใช้รถกลับบ้านในวันนั้น
+          และกังวลว่าต้องทิ้งรถไว้ที่สาขาอีก
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 1 → Yellow</strong>
+        มีอาการผิดปกติที่ต้องตรวจสอบ
+        แต่ยังไม่ทราบว่าระบบมีความเสียหายหรือมีความเสี่ยงด้านความปลอดภัยหรือไม่
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ช่างตรวจสอบแล้วพบว่าระบบปรับอากาศยังทำงานได้ตามปกติ
+          แต่ต้องใช้เวลาสักระยะกว่าจะเย็น เนื่องจากรถจอดอยู่กลางแดดเป็นเวลานาน
+        </p>
+        <p>
+          ช่างแนะนำวิธีใช้งานและตรวจสอบเรียบร้อยแล้ว
+          เมื่อลูกค้าทดลองอีกครั้ง แอร์เย็นและลูกค้ารับรถกลับ
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟨 Layer 2 → Yellow</strong>
+        ข้อมูลใหม่ทำให้รู้ว่ายังไม่พบความเสียหาย
+        และอาการสามารถอธิบายและจัดการได้โดยไม่ต้องยกระดับ
+      </div>
+
+
+      <div class="edit-note">
+        <strong>หมายเหตุสำหรับ Facilitator</strong>
+        คะแนน 0–1–2 ของแต่ละมิติสามารถใส่ตาม Matrix เวอร์ชันที่พี่ใช้จริงได้ที่นี่
+        โดยไม่จำเป็นต้องเปลี่ยนโครงสร้างหน้าเว็บ
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          บางครั้งข้อมูลใหม่ไม่ได้ทำให้เคสรุนแรงขึ้น
+          แต่ช่วยให้เรามั่นใจมากขึ้นว่าเคสยังอยู่ในระดับเดิม
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       CASE 08
+  ====================================================== -->
+
+  <section id="case8" class="case-page">
+
+    <div class="content">
+
+      <button class="back-button" onclick="showLanding()">
+        ← เลือก CASE อื่น
+      </button>
+
+      <div class="case-header">
+        <span class="case-tag">CASE 08</span>
+        <h2>ลูกค้ากลับมาครั้งที่สอง เพราะปัญหาเดิมยังไม่หาย</h2>
+        <p>ข้อมูลเพิ่ม → ยืนยันระดับเดิม</p>
+      </div>
+
+      <div class="color-transition">
+        <div class="color-box orange">🟧 Orange</div>
+        <div class="arrow">→</div>
+        <div class="color-box orange">🟧 Orange</div>
+      </div>
+
+
+      <div class="layer layer1">
+        <h4>ข้อมูลชุดที่ 1 — Layer 1</h4>
+        <p>
+          ลูกค้ากลับมาที่สาขาและแจ้งว่าปัญหาเสียงจากล้อ
+          ที่เคยเข้ารับบริการเมื่อสัปดาห์ก่อนกลับมาอีกครั้ง
+        </p>
+        <p>
+          ลูกค้าเริ่มไม่พอใจและบอกว่าไม่มีเวลามาเข้าออกหลายรอบ
+          เพราะครั้งก่อนก็เสียเวลาไปแล้ว
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 1 → Orange</strong>
+        ปัญหาเกิดซ้ำและเริ่มกระทบความเชื่อมั่นของลูกค้า
+        จึงควรให้ผู้จัดการรับรู้และรับผิดชอบการตรวจสอบ
+      </div>
+
+
+      <div class="layer layer2">
+        <h4>ข้อมูลชุดที่ 2 — Layer 2</h4>
+        <p>
+          ผู้จัดการตรวจสอบแล้วพบว่าลูกค้าเคยเข้ารับบริการด้วยปัญหาเดียวกันมาแล้วหนึ่งครั้ง
+          และวันนี้กลับมาด้วยอาการเดิม
+        </p>
+        <p>
+          ช่างตรวจสอบเบื้องต้นแล้ว ยังไม่พบสัญญาณที่บ่งชี้ถึงอันตรายในการใช้งานรถ
+          แต่จำเป็นต้องตรวจสอบเพิ่มเติมเพื่อหาสาเหตุที่แท้จริง
+        </p>
+        <p>
+          ผู้จัดการรับเรื่องเองและแจ้งว่าจะตรวจข้อมูลครั้งก่อน
+          พร้อมตรวจรถเพิ่มเติมแล้วกลับมาแจ้งผลลูกค้า
+        </p>
+      </div>
+
+
+      <div class="summary">
+        <strong>🟧 Layer 2 → Orange</strong>
+        ข้อมูลใหม่ยืนยันว่าปัญหาเกิดซ้ำและต้องได้รับการจัดการอย่างจริงจัง
+        แต่ยังไม่มีข้อมูลด้านความปลอดภัยหรือความเสียหายที่ทำให้ต้องยกระดับเป็น Red
+      </div>
+
+
+      <div class="edit-note">
+        <strong>หมายเหตุสำหรับ Facilitator</strong>
+        คะแนน 0–1–2 ของแต่ละมิติสามารถใส่ตาม Matrix เวอร์ชันที่พี่ใช้จริงได้ที่นี่
+        โดยไม่จำเป็นต้องเปลี่ยนโครงสร้างหน้าเว็บ
+      </div>
+
+
+      <div class="learning">
+        <span class="label">LEARNING POINT</span>
+        <p>
+          “เกิดซ้ำ” ทำให้ความรุนแรงของประสบการณ์และความเชื่อมั่นของลูกค้าเพิ่มขึ้น
+          แต่ไม่ได้หมายความว่าทุกเคสที่เกิดซ้ำจะต้องเป็น Red
+          เราต้องดูข้อเท็จจริงอื่นประกอบด้วย
+        </p>
+      </div>
+
+
+      <div class="discussion">
+
+        <h3>💬 ชวนกลุ่มคุย</h3>
+
+        <div class="question">
+          <strong>① เราเห็นอะไรเหมือนกัน?</strong>
+          “ข้อมูลอะไรที่ทำให้เราคิดตรงกัน?”
+        </div>
+
+        <div class="question">
+          <strong>② เราเห็นต่างตรงไหน?</strong>
+          “มีข้อมูลส่วนไหนที่เราอาจตีความต่างกัน?”
+        </div>
+
+        <div class="question">
+          <strong>③ ถ้าเราได้ข้อมูลเพิ่มอีก 1 อย่าง เราอยากรู้อะไร?</strong>
+          “ข้อมูลอะไรที่จะทำให้เราตัดสินใจเปลี่ยนสีได้?”
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="footer">
+    B-QUIK Customer Care Protocol | Facilitator Guide
+  </div>
+
+</div>
+
+
+<script>
+
+function showLanding(){
+
+  document.getElementById("landing").style.display = "block";
+
+  const pages = document.querySelectorAll(".case-page");
+
+  pages.forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function showCase(number){
+
+  document.getElementById("landing").style.display = "none";
+
+  const pages = document.querySelectorAll(".case-page");
+
+  pages.forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  const selected = document.getElementById("case" + number);
+
+  if(selected){
+    selected.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>
